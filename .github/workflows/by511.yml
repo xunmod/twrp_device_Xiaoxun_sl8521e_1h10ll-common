@@ -1,7 +1,7 @@
 name: Compile TWRP by omnirom 5.1.1
 on:
   push:
-    branches: [ 'omni-4.4' ]
+    branches: [ 'twrp-4.4' ]
   workflow_dispatch:
 jobs:
   build:
