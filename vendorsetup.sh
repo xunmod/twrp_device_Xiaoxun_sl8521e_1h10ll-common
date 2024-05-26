@@ -1,2 +1,2 @@
-add_lunch_combo omni_sl8521e_1h10ll_sw761-eng
-add_lunch_combo omni_sl8521e_1h10ll_sw761-userdebug
+#!/bin/sh
+patch -f -p1 < $(dirname $0)/sys_usb_ffs_ready.patch || true
