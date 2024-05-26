@@ -3,6 +3,8 @@
 In `BoardConfig.mk`:
 ```
 include device/Xiaoxun/sl8521e_1h10ll-common/BoardConfigCommon.mk
+
+TARGET_PREBUILT_DTIMAGE := (path to dt.img)
 ```
 
 In `device.mk`:
