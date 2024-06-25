@@ -40,15 +40,15 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          export twrp_version=$(cat bootable/recovery/variables.h | grep "define TW_MAIN_VERSION_STR" | cut -d '"' -f2)
           sudo rm -f /usr/bin/python /usr/bin/python3.6 /usr/bin/python3.6m /usr/local/bin/python
           sudo ln -sf /usr/bin/python2.7 /usr/bin/python
           cd $GITHUB_WORKSPACE/twrp
           source build/envsetup.sh
-          lunch sl8521e_1h10ll_sw761
+          lunch omni_sl8521e_1h10ll_sw761-eng
           mka -j$(nproc --all) recoveryimage
+          export twrp_version=$(cat bootable/recovery/variables.h | grep "define TW_MAIN_VERSION_STR" | cut -d '"' -f2)
           cp out/target/product/sl8521e_1h10ll_sw761/recovery.img ../twrp-${version}_0-sl8521e_1h10ll_sw761.img
-          lunch sl8521e_1h10ll_sw763
+          lunch omni_sl8521e_1h10ll_sw763-eng
           mka -j$(nproc --all) recoveryimage
           cp out/target/product/sl8521e_1h10ll_sw763/recovery.img ../twrp-${version}_0-sl8521e_1h10ll_sw763.img
       - uses: actions/upload-artifact@v3
