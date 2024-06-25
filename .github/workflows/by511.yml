@@ -1,0 +1,61 @@
+name: (5)Compile TWRP by omnirom 5.1.1
+on:
+  push:
+    branches: [ 'twrp-5.1' ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/catthehacker/ubuntu:runner-18.04
+    env:
+      LC_ALL: "C"
+    steps:
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '8'
+      - name: Configure
+        run: |
+          curl https://storage.googleapis.com/git-repo-downloads/repo | sudo tee /usr/bin/repo > /dev/null
+          sudo ln -sf /usr/bin/python3 /usr/bin/python
+          sudo chmod +x /usr/bin/repo
+          # sudo apt remove -yq openjdk*
+          sudo apt update
+          sudo apt install -yq bc bison build-essential curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python bash tmux
+          java -version
+          # ls /usr/lib/jvm/java-8-openjdk-amd64/lib/tools.jar
+          # cp /usr/lib/jvm/java-8-openjdk-amd64/lib/tools.jar /usr/lib/
+          git config --global user.email "116288337+xunmod@users.noreply.github.com"
+          git config --global user.name "xunmod@bot"
+      - name: Get source
+        run: |
+          mkdir $GITHUB_WORKSPACE/twrp
+          cd $GITHUB_WORKSPACE/twrp
+          repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-5.1
+          repo sync -c -f --no-tags --no-clone-bundle -j$(nproc --all)
+      - name: Setup device
+        uses: actions/checkout@v3
+        with:
+          path: 'twrp/device/Xiaoxun'
+      - name: Build
+        shell: bash
+        run: |
+          export twrp_version=$(cat bootable/recovery/variables.h | grep "define TW_MAIN_VERSION_STR" | cut -d '"' -f2)
+          sudo rm -f /usr/bin/python /usr/bin/python3.6 /usr/bin/python3.6m /usr/local/bin/python
+          sudo ln -sf /usr/bin/python2.7 /usr/bin/python
+          cd $GITHUB_WORKSPACE/twrp
+          source build/envsetup.sh
+          lunch sl8521e_1h10ll_sw761
+          mka -j$(nproc --all) recoveryimage
+          cp out/target/product/sl8521e_1h10ll_sw761/recovery.img ../twrp-${version}_0-sl8521e_1h10ll_sw761.img
+          lunch sl8521e_1h10ll_sw763
+          mka -j$(nproc --all) recoveryimage
+          cp out/target/product/sl8521e_1h10ll_sw763/recovery.img ../twrp-${version}_0-sl8521e_1h10ll_sw763.img
+      - uses: actions/upload-artifact@v3
+        with:
+          name: TWRP Image for MiKids4
+          path: 'twrp-*_sw761.img'
+      - uses: actions/upload-artifact@v3
+        with:
+          name: TWRP Image for MiKids4x
+          path: 'twrp-*_sw763.img'
