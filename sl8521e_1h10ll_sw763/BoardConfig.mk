@@ -16,12 +16,7 @@
 
 include device/Xiaoxun/sl8521e_1h10ll-common/BoardConfigCommon.mk
 
-LOCAL_PATH := device/Xiaoxun/sl8521e_1h10ll_sw763
-
 TARGET_BOARD_PLATFORM := SW763
-
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
-TARGET_PREBUILT_DTIMAGE := $(LOCAL_PATH)/prebuilt/dt.img
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_LARGE_FILESYSTEM := true
