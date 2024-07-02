@@ -41,7 +41,9 @@ RECOVERY_GRAPHICS_USE_LINELENGTH := true
 BOARD_USE_FRAMEBUFFER_ALPHA_CHANNEL := true
 TARGET_DISABLE_TRIPLE_BUFFERING := false
 
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0/gadget/lun%d/file
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp.fstab
+RECOVERY_SDCARD_ON_DATA := true
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.gs6/lun.0
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_EXTRA_LANGUAGES := true
 TW_THEME := watch_mdpi
