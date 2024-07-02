@@ -25,7 +25,6 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_BOOTLOADER_BOARD_NAME := sl8521e_1h10ll 
 TARGET_NO_BOOTLOADER := true
 
-INSTALLED_DTIMAGE_TARGET ?= $(PRODUCT_OUT)/dt.img
 BOARD_CUSTOM_BOOTIMG_MK := device/Xiaoxun/sl8521e_1h10ll-common/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
@@ -34,9 +33,7 @@ BOARD_MKBOOTIMG_ARGS := \
 	--kernel_offset 0x00008000 \
 	--ramdisk_offset 0x05400000 \
 	--second_offset 0x00f00000 \
-	--tags_offset 0x00000100 \
-	--dt $(INSTALLED_DTIMAGE_TARGET)
-
+	--tags_offset 0x00000100
 
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 BOARD_USE_FRAMEBUFFER_ALPHA_CHANNEL := true
