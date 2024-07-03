@@ -21,7 +21,3 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/rootdir/init.recovery.usb.rc:root/init.recovery.usb.rc \
     $(COMMON_FOLDER)/rootdir/ueventd.sl8521e_1h10ll.rc:root/ueventd.sl8521e_1h10ll.rc \
     $(COMMON_FOLDER)/save_logs.sh:root/sbin/save_logs.sh
-
-ADDITIONAL_BUILD_PROPERTIES += \
-    sys.usb.configfs=1 \
-    sys.usb.controller=musb-hdrc.0.auto

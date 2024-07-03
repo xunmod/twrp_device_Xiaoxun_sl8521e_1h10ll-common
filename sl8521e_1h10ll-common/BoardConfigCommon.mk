@@ -35,13 +35,10 @@ BOARD_MKBOOTIMG_ARGS := \
 	--second_offset 0x00f00000 \
 	--tags_offset 0x00000100
 
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-BOARD_USE_FRAMEBUFFER_ALPHA_CHANNEL := true
-TARGET_DISABLE_TRIPLE_BUFFERING := false
-
 TARGET_RECOVERY_FSTAB := device/Xiaoxun/sl8521e_1h10ll-common/twrp.fstab
 RECOVERY_SDCARD_ON_DATA := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.gs6/lun.0
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/kernel/config/usb_gadget/g1/functions/mass_storage.gs6/lun.0/file
+TW_BRIGHTNESS_PATH := /sys/devices/platform/sprd-panel-if/display/panel0/sprd_backlight/brightness
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_EXTRA_LANGUAGES := true
 TW_THEME := watch_mdpi
@@ -49,14 +46,13 @@ TW_DEFAULT_BRIGHTNESS := 165
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_MAX_BRIGHTNESS := 255
 TW_SCREEN_BLANK_ON_BOOT := true
-# TW_EXCLUDE_BASH := true
-# TW_EXCLUDE_TZDATA := true
-# TW_EXCLUDE_TWRPAPP := true
 TW_INCLUDE_FB2PNG := true
+TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_NTFS_3G := true
 TW_INCLUDE_FUSE_EXFAT := true
-# TWRP_INCLUDE_LOGCAT := true
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_NANO := true
 # TW_INCLUDE_SUPERSU := true
 TW_DEFAULT_LANGUAGE := zh-CN
+TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true
