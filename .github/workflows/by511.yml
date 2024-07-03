@@ -9,8 +9,6 @@ jobs:
       image: ghcr.io/catthehacker/ubuntu:runner-18.04
     env:
       LC_ALL: "C"
-      CC_WRAPPER: "/usr/bin/ccache"
-      CXX_WRAPPER: "/usr/bin/ccache"
     steps:
       - uses: actions/setup-java@v3
         with:

@@ -30,7 +30,7 @@ on post-fs-data
     mkdir /data/local/slogmodem 0770 shell system
 
 on boot
-    # Allow u-boot-spl write
+    # Allow write u-boot-spl
     write /sys/block/mmcblk0boot0/force_ro 0
     write /sys/block/mmcblk0boot1/force_ro 0
 
@@ -38,3 +38,7 @@ on boot
 service save_logs /sbin/save_logs.sh
     seclabel u:r:recovery:s0
     oneshot
+    disabled
+
+on post-fs-data
+    start save_logs
