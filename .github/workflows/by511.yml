@@ -10,10 +10,6 @@ jobs:
     env:
       LC_ALL: "C"
     steps:
-      - uses: actions/setup-java@v2
-        with:
-          distribution: 'zulu'
-          java-version: '8'
       - name: Configure
         run: |
           curl https://storage.googleapis.com/git-repo-downloads/repo | sudo tee /usr/bin/repo > /dev/null
@@ -22,11 +18,16 @@ jobs:
           # sudo apt remove -yq openjdk*
           sudo apt update
           sudo apt install -yq bc bison build-essential curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python bash ccache
-          java -version
-          # ls /usr/lib/jvm/java-8-openjdk-amd64/lib/tools.jar
-          # cp /usr/lib/jvm/java-8-openjdk-amd64/lib/tools.jar /usr/lib/
           git config --global user.email "116288337+xunmod@users.noreply.github.com"
           git config --global user.name "xunmod@bot"
+          sudo su -c 'echo "deb http://security.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list' root
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 112695A0E562B32A 54404762BBB6E853
+          sudo apt update
+          sudo apt install libc6 libc6-dev -y
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '8'
       - name: Get source
         run: |
           mkdir $GITHUB_WORKSPACE/twrp
