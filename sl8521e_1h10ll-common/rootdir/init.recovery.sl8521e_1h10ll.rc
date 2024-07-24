@@ -34,18 +34,7 @@ on boot
     write /sys/block/mmcblk0boot0/force_ro 0
     write /sys/block/mmcblk0boot1/force_ro 0
 
-service logger /sbin/logcat -b all -D -f /cache/boot_log.txt
-    class main
+service save_logs /sbin/busybox sh /sbin/save_logs.sh
     user root
-    group root system
-    disabled
+    group root
     oneshot
-
-on post-fs-data
-    # Clear existing log and start the service
-    rm /cache/boot_log.txt
-    start logger
-
-on property:sys.boot_completed=1
-    # Stop the logger service
-    stop logger

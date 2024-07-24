@@ -37,7 +37,8 @@ BOARD_MKBOOTIMG_ARGS := \
 
 TARGET_RECOVERY_FSTAB := device/Xiaoxun/sl8521e_1h10ll-common/twrp.fstab
 RECOVERY_SDCARD_ON_DATA := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/kernel/config/usb_gadget/g1/functions/mass_storage.gs6/lun.0/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.gs6/lun.0/file
+# Seem 4X uses another path
 TW_BRIGHTNESS_PATH := /sys/devices/platform/sprd-panel-if/display/panel0/sprd_backlight/brightness
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_EXTRA_LANGUAGES := true
