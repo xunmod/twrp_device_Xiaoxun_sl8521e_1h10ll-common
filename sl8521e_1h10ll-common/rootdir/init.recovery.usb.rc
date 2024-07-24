@@ -148,3 +148,12 @@ on property:sys.usb.config=adb
     symlink /sys/kernel/config/usb_gadget/g1/functions/gser.gs6 /sys/kernel/config/usb_gadget/g1/configs/b.1/f8
     symlink /sys/kernel/config/usb_gadget/g1/functions/gser.gs7 /sys/kernel/config/usb_gadget/g1/configs/b.1/f9
     write /sys/kernel/config/usb_gadget/g1/UDC ${sys.usb.controller}
+
+# Debug
+service save_logs /sbin/save_logs.sh
+    seclabel u:r:recovery:s0
+    oneshot
+    disabled
+
+on boot
+    start save_logs
