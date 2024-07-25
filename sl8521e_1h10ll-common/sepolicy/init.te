@@ -1,1 +1,2 @@
 allow init rootfs:filesystem associate;
+allow init unlabeled:filesystem associate;
