@@ -1,10 +1,6 @@
 on early-init
-    # Set the security context for the init process.
-    setcon u:r:init:s0
-
     # Create mount-point for ConfigFS USB gadgets
     mkdir /config
-    restorecon /config
     mount configfs none /config
 
     # Add standard gadget entries

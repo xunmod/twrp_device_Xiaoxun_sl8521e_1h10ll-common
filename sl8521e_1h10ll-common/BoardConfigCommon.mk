@@ -63,6 +63,4 @@ TARGET_USES_LOGD := true
 # SELinux
 TWHAVE_SELINUX := true
 BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
-BOARD_SEPOLICY_UNION += \
-    file_contexts \
-		init.te
+BOARD_SEPOLICY_UNION += unlabeled.te

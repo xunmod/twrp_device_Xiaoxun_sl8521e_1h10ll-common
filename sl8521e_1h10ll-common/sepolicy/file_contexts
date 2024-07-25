@@ -1,2 +1,0 @@
-# USB gadget configfs
-/config                  u:object_r:rootfs:s0
