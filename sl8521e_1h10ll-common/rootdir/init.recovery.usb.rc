@@ -49,12 +49,6 @@ on early-init
     setprop sys.usb.configfs 1
     setprop sys.usb.controller "musb-hdrc.0.auto"
 
-on property:sys.usb.ffs.ready=1
-    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
-
-on property:sys.usb.ffs.mtp.ready=1
-    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
-
 on property:sys.usb.config=none
     write /config/usb_gadget/g1/UDC "none"
     setprop sys.usb.ffs.ready 0
