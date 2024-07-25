@@ -1,5 +1,5 @@
 # Allow setcon
-allow init self:process { setcurrent, dyntransition };
+allow init self:process { setcurrent dyntransition };
 
 # Allow setup usb_gadget
 allow init self:filesystem associate;
