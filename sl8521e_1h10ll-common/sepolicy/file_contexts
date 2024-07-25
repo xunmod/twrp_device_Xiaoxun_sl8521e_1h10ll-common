@@ -1,4 +1,2 @@
 # USB gadget configfs
-/config(/.*)?                  u:object_r:rootfs:s0
-/config/usb_gadget/g1          u:object_r:rootfs:s0
-/config/usb_gadget/g1(/.*)?    u:object_r:rootfs:s0
+/config                  u:object_r:rootfs:s0

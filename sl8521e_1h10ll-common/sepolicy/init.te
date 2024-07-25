@@ -1,2 +1,2 @@
-allow init rootfs:filesystem associate;
-allow init unlabeled:filesystem associate;
+allow init self:process setcurrent;
+allow init self:filesystem associate;
