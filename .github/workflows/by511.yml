@@ -41,16 +41,16 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          sudo rm -f /usr/bin/python /usr/bin/python3.6 /usr/bin/python3.6m /usr/local/bin/python
+          sudo rm -f /usr/bin/python /usr/local/bin/python
           sudo ln -sf /usr/bin/python2.7 /usr/bin/python
           cd $GITHUB_WORKSPACE/twrp
           source build/envsetup.sh
           lunch omni_sl8521e_1h10ll_sw761-eng
+          ls system/core/libasyncio || exit 1
           mka -j$(nproc --all) recoveryimage
           export twrp_version=$(cat bootable/recovery/variables.h | grep "define TW_MAIN_VERSION_STR" | cut -d '"' -f2)
           cp out/target/product/sl8521e_1h10ll_sw761/recovery.img ../twrp-${twrp_version}_0-sl8521e_1h10ll_sw761.img
           lunch omni_sl8521e_1h10ll_sw763-eng
-          ls system/core/libasyncio || exit 1
           mka -j$(nproc --all) recoveryimage
           cp out/target/product/sl8521e_1h10ll_sw763/recovery.img ../twrp-${twrp_version}_0-sl8521e_1h10ll_sw763.img
           lunch omni_sl8521e_1h10ll_sw771-eng
