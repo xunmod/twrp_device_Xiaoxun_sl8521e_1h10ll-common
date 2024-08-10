@@ -2,7 +2,7 @@
   {
     "remote": "github",
     "repository": "xunmod/android_system_core_libasyncio",
-    "target_path": "system/core/libasyncio",
+    "target_path": "system/extras/libasyncio",
     "revision": "main"
   }
 ]
