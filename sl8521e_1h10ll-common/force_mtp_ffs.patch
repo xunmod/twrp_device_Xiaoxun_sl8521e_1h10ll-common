@@ -1,0 +1,33 @@
+diff -uprN a/bootable/recovery/Android.mk b/bootable/recovery/Android.mk
+--- a/bootable/recovery/Android.mk	2024-08-10 20:20:59.235660205 +0800
++++ b/bootable/recovery/Android.mk	2024-08-10 20:55:43.616955189 +0800
+@@ -233,14 +233,10 @@ ifeq ($(TW_FORCE_USE_BUSYBOX), true)
+ else
+     TW_USE_TOOLBOX := true
+ endif
+-ifeq ($(TW_EXCLUDE_MTP),)
+-    LOCAL_SHARED_LIBRARIES += libtwrpmtp-ffs
+ endif
+-else
++
+ ifeq ($(TW_EXCLUDE_MTP),)
+-    LOCAL_CFLAGS += -DTW_HAS_LEGACY_MTP
+-    LOCAL_SHARED_LIBRARIES += libtwrpmtp-legacy
+-endif
++    LOCAL_SHARED_LIBRARIES += libtwrpmtp-ffs
+ endif
+ 
+ ifeq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
+@@ -897,11 +893,7 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSIO
+ include $(commands_TWRP_local_path)/bootloader_message/Android.mk
+ endif
+ 
+-ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
+-    include $(commands_TWRP_local_path)/mtp/ffs/Android.mk
+-else
+-    include $(commands_TWRP_local_path)/mtp/legacy/Android.mk
+-endif
++include $(commands_TWRP_local_path)/mtp/ffs/Android.mk
+ 
+ ifeq ($(wildcard system/core/uncrypt/Android.mk),)
+     #include $(commands_TWRP_local_path)/uncrypt/Android.mk
