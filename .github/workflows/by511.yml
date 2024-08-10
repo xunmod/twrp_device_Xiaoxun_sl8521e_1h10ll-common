@@ -46,7 +46,7 @@ jobs:
           cd $GITHUB_WORKSPACE/twrp
           source build/envsetup.sh
           lunch omni_sl8521e_1h10ll_sw761-eng
-          ls system/core/libasyncio || exit 1
+          ls system/extras/libasyncio || exit 1
           mka -j$(nproc --all) recoveryimage
           export twrp_version=$(cat bootable/recovery/variables.h | grep "define TW_MAIN_VERSION_STR" | cut -d '"' -f2)
           cp out/target/product/sl8521e_1h10ll_sw761/recovery.img ../twrp-${twrp_version}_0-sl8521e_1h10ll_sw761.img
