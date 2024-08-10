@@ -1,6 +1,6 @@
 diff -uprN a/bootable/recovery/Android.mk b/bootable/recovery/Android.mk
 --- a/bootable/recovery/Android.mk	2024-08-10 20:20:59.235660205 +0800
-+++ b/bootable/recovery/Android.mk	2024-08-10 20:55:43.616955189 +0800
++++ b/bootable/recovery/Android.mk	2024-08-10 23:14:35.912450751 +0800
 @@ -233,14 +233,10 @@ ifeq ($(TW_FORCE_USE_BUSYBOX), true)
  else
      TW_USE_TOOLBOX := true
@@ -31,3 +31,49 @@ diff -uprN a/bootable/recovery/Android.mk b/bootable/recovery/Android.mk
  
  ifeq ($(wildcard system/core/uncrypt/Android.mk),)
      #include $(commands_TWRP_local_path)/uncrypt/Android.mk
+diff -uprN a/bootable/recovery/mtp/ffs/Android.mk b/bootable/recovery/mtp/ffs/Android.mk
+--- a/bootable/recovery/mtp/ffs/Android.mk	2024-08-10 20:20:59.363660783 +0800
++++ b/bootable/recovery/mtp/ffs/Android.mk	2024-08-10 23:15:24.408649786 +0800
+@@ -37,15 +37,13 @@ LOCAL_SRC_FILES = \
+     mtp_MtpDatabase.cpp \
+     node.cpp
+ 
+-ifeq ($(shell test $(PLATFORM_SDK_VERSION) -gt 25; echo $$?),0)
+-    LOCAL_CFLAGS += -D_FFS_DEVICE
+-    LOCAL_SHARED_LIBRARIES += libasyncio
+-    LOCAL_SRC_FILES += \
+-        MtpDescriptors.cpp \
+-        MtpFfsHandle.cpp \
+-        MtpFfsCompatHandle.cpp \
+-        PosixAsyncIO.cpp
+-endif
++LOCAL_CFLAGS += -D_FFS_DEVICE
++LOCAL_SHARED_LIBRARIES += libasyncio
++LOCAL_SRC_FILES += \
++    MtpDescriptors.cpp \
++    MtpFfsHandle.cpp \
++    MtpFfsCompatHandle.cpp \
++    PosixAsyncIO.cpp
+ 
+ LOCAL_SHARED_LIBRARIES += libz \
+                           libc \
+diff -uprN a/bootable/recovery/prebuilt/Android.mk b/bootable/recovery/prebuilt/Android.mk
+--- a/bootable/recovery/prebuilt/Android.mk	2024-08-10 20:20:59.379660855 +0800
++++ b/bootable/recovery/prebuilt/Android.mk	2024-08-10 23:15:54.132771833 +0800
+@@ -158,16 +158,10 @@ else
+     TW_EXCLUDE_MTP := true
+ endif
+ 
+-ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
+ ifneq ($(TW_EXCLUDE_MTP), true)
+     RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libtwrpmtp-ffs.so
+     RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libasyncio.so
+ endif
+-else
+-ifneq ($(TW_EXCLUDE_MTP), true)
+-    RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libtwrpmtp-legacy.so
+-endif
+-endif
+ 
+ RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libext4_utils.so
+ RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libaosprecovery.so
