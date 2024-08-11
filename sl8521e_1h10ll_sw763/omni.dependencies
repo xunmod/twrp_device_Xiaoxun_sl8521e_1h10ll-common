@@ -9,6 +9,6 @@
     "remote": "github",
     "repository": "xunmod/android_system_core_base",
     "target_path": "system/extras/libbase",
-    "revision": "main"
+    "revision": "android-7.1"
   }
 ]
