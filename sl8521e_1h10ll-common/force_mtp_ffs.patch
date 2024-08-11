@@ -1,6 +1,7 @@
-diff -uprN a/bootable/recovery/Android.mk b/bootable/recovery/Android.mk
---- a/bootable/recovery/Android.mk	2024-08-10 20:20:59.235660205 +0800
-+++ b/bootable/recovery/Android.mk	2024-08-10 23:14:35.912450751 +0800
+diff --git a/Android.mk b/Android.mk
+index aedb3f9..957884a 100755
+--- a/Android.mk
++++ b/Android.mk
 @@ -233,14 +233,10 @@ ifeq ($(TW_FORCE_USE_BUSYBOX), true)
  else
      TW_USE_TOOLBOX := true
@@ -18,7 +19,7 @@ diff -uprN a/bootable/recovery/Android.mk b/bootable/recovery/Android.mk
  endif
  
  ifeq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
-@@ -897,11 +893,7 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSIO
+@@ -897,11 +893,7 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -le 25; echo $$?),0)
  include $(commands_TWRP_local_path)/bootloader_message/Android.mk
  endif
  
@@ -31,35 +32,49 @@ diff -uprN a/bootable/recovery/Android.mk b/bootable/recovery/Android.mk
  
  ifeq ($(wildcard system/core/uncrypt/Android.mk),)
      #include $(commands_TWRP_local_path)/uncrypt/Android.mk
-diff -uprN a/bootable/recovery/mtp/ffs/Android.mk b/bootable/recovery/mtp/ffs/Android.mk
---- a/bootable/recovery/mtp/ffs/Android.mk	2024-08-10 20:20:59.363660783 +0800
-+++ b/bootable/recovery/mtp/ffs/Android.mk	2024-08-10 23:15:24.408649786 +0800
-@@ -37,15 +37,13 @@ LOCAL_SRC_FILES = \
-     mtp_MtpDatabase.cpp \
-     node.cpp
+diff --git a/mtp/ffs/MtpFfsCompatHandle.cpp b/mtp/ffs/MtpFfsCompatHandle.cpp
+index 4027d60..c738edb 100644
+--- a/mtp/ffs/MtpFfsCompatHandle.cpp
++++ b/mtp/ffs/MtpFfsCompatHandle.cpp
+@@ -15,7 +15,7 @@
+  */
  
--ifeq ($(shell test $(PLATFORM_SDK_VERSION) -gt 25; echo $$?),0)
--    LOCAL_CFLAGS += -D_FFS_DEVICE
--    LOCAL_SHARED_LIBRARIES += libasyncio
--    LOCAL_SRC_FILES += \
--        MtpDescriptors.cpp \
--        MtpFfsHandle.cpp \
--        MtpFfsCompatHandle.cpp \
--        PosixAsyncIO.cpp
--endif
-+LOCAL_CFLAGS += -D_FFS_DEVICE
-+LOCAL_SHARED_LIBRARIES += libasyncio
-+LOCAL_SRC_FILES += \
-+    MtpDescriptors.cpp \
-+    MtpFfsHandle.cpp \
-+    MtpFfsCompatHandle.cpp \
-+    PosixAsyncIO.cpp
+ #include <android-base/logging.h>
+-#include <android-base/properties.h>
++#include <cutils/properties.h>
+ #include <dirent.h>
+ #include <errno.h>
+ #include <fcntl.h>
+diff --git a/mtp/ffs/MtpFfsHandle.cpp b/mtp/ffs/MtpFfsHandle.cpp
+index 01b6f2e..c471462 100644
+--- a/mtp/ffs/MtpFfsHandle.cpp
++++ b/mtp/ffs/MtpFfsHandle.cpp
+@@ -15,7 +15,7 @@
+  */
  
- LOCAL_SHARED_LIBRARIES += libz \
-                           libc \
-diff -uprN a/bootable/recovery/prebuilt/Android.mk b/bootable/recovery/prebuilt/Android.mk
---- a/bootable/recovery/prebuilt/Android.mk	2024-08-10 20:20:59.379660855 +0800
-+++ b/bootable/recovery/prebuilt/Android.mk	2024-08-10 23:15:54.132771833 +0800
+ #include <android-base/logging.h>
+-#include <android-base/properties.h>
++#include <cutils/properties.h>
+ #include <asyncio/AsyncIO.h>
+ #include <dirent.h>
+ #include <errno.h>
+diff --git a/mtp/ffs/MtpServer.cpp b/mtp/ffs/MtpServer.cpp
+index fa67024..67197a1 100755
+--- a/mtp/ffs/MtpServer.cpp
++++ b/mtp/ffs/MtpServer.cpp
+@@ -16,7 +16,7 @@
+ 
+ #include <algorithm>
+ #include <android-base/logging.h>
+-#include <android-base/properties.h>
++#include <cutils/properties.h>
+ #include <chrono>
+ #include <dirent.h>
+ #include <errno.h>
+diff --git a/prebuilt/Android.mk b/prebuilt/Android.mk
+index 17636ae..b1ae736 100644
+--- a/prebuilt/Android.mk
++++ b/prebuilt/Android.mk
 @@ -158,16 +158,10 @@ else
      TW_EXCLUDE_MTP := true
  endif
