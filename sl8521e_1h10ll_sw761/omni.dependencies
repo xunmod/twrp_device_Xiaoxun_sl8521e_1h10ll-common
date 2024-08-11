@@ -4,5 +4,11 @@
     "repository": "xunmod/android_system_core_libasyncio",
     "target_path": "system/extras/libasyncio",
     "revision": "main"
+  },
+  {
+    "remote": "github",
+    "repository": "xunmod/android_system_core_base",
+    "target_path": "system/extras/libbase",
+    "revision": "main"
   }
 ]
