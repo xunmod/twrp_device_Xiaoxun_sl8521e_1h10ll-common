@@ -2,6 +2,7 @@ name: (5)Compile TWRP by omnirom 5.1.1
 on:
   push:
     branches: [ 'twrp-5.1' ]
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
