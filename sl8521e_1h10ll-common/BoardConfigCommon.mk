@@ -43,15 +43,12 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.
 # Seem 4X uses another path
 TW_BRIGHTNESS_PATH := /sys/devices/platform/sprd-panel-if/display/panel0/sprd_backlight/brightness
 TW_SCREEN_BLANK_ON_BOOT := true
-BOARD_USE_FRAMEBUFFER_ALPHA_CHANNEL := true
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TARGET_DISABLE_TRIPLE_BUFFERING := false
 TW_EXTRA_LANGUAGES := true
 TW_THEME := watch_mdpi
 TW_DEFAULT_BRIGHTNESS := 165
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_MAX_BRIGHTNESS := 255
-TW_SCREEN_BLANK_ON_BOOT := true
+TW_NO_SCREEN_BLANK := false
 TW_INCLUDE_FB2PNG := true
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_NTFS_3G := true
