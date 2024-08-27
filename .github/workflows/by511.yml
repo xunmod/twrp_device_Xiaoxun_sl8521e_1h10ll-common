@@ -49,6 +49,7 @@ jobs:
           mka -j$(nproc --all) recoveryimage
           export twrp_version=$(cat bootable/recovery/variables.h | grep "define TW_MAIN_VERSION_STR" | cut -d '"' -f2)
           cp out/target/product/sl8521e_1h10ll_sw761/recovery.img ../twrp-${twrp_version}_0-sl8521e_1h10ll_sw761.img
+          cp $(find out -name adf_test | xargs) ../ || true
           lunch omni_sl8521e_1h10ll_sw763-eng
           mka -j$(nproc --all) recoveryimage
           cp out/target/product/sl8521e_1h10ll_sw763/recovery.img ../twrp-${twrp_version}_0-sl8521e_1h10ll_sw763.img
@@ -67,3 +68,7 @@ jobs:
         with:
           name: TWRP Image for MiKids6x
           path: 'twrp-*_sw771.img'
+      - uses: actions/upload-artifact@v3
+        with:
+          name: adf_test
+          path: 'adf_test'
