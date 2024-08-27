@@ -1,4 +1,4 @@
-From 4d99d56d1e31ebcb76c55a10777c40f34ce91f2d Mon Sep 17 00:00:00 2001
+From 60dfb8da26acccd371fe363d18b7125fbd7da8ef Mon Sep 17 00:00:00 2001
 From: xunmod <116288337+xunmod@users.noreply.github.com>
 Date: Tue, 27 Aug 2024 14:24:24 +0800
 Subject: [PATCH] Add adf_test
@@ -7,8 +7,7 @@ Subject: [PATCH] Add adf_test
  Android.mk          |   2 +
  adf_test/Android.mk |  28 +++
  adf_test/adf_test.c | 405 ++++++++++++++++++++++++++++++++++++++++++++
- prebuilt/Android.mk |   1 +
- 4 files changed, 436 insertions(+)
+ 3 files changed, 435 insertions(+)
  create mode 100644 adf_test/Android.mk
  create mode 100644 adf_test/adf_test.c
 
@@ -34,7 +33,7 @@ index aedb3f9..7343ba4 100755
      $(commands_TWRP_local_path)/libtar/Android.mk \
 diff --git a/adf_test/Android.mk b/adf_test/Android.mk
 new file mode 100644
-index 0000000..294c4ac
+index 0000000..f6b4ba4
 --- /dev/null
 +++ b/adf_test/Android.mk
 @@ -0,0 +1,28 @@
@@ -59,12 +58,12 @@ index 0000000..294c4ac
 +LOCAL_SRC_FILES := adf_test.c
 +LOCAL_CFLAGS := -std=c99
 +LOCAL_MODULE := adf_test
-+LOCAL_MODULE_STEM := twrp
 +LOCAL_MODULE_TAGS := eng
 +LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
 +LOCAL_PACK_MODULE_RELOCATIONS := false
 +LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
-+LOCAL_WHOLE_STATIC_LIBRARIES += libadf
++LOCAL_STATIC_LIBRARIES += libadf
++LOCAL_FORCE_STATIC_EXECUTABLE := true
 +include $(BUILD_EXECUTABLE)
 diff --git a/adf_test/adf_test.c b/adf_test/adf_test.c
 new file mode 100644
@@ -477,18 +476,6 @@ index 0000000..4ac4c5f
 +  teardown();
 +  return 0;
 +}
-diff --git a/prebuilt/Android.mk b/prebuilt/Android.mk
-index 17636ae..ee9b36e 100644
---- a/prebuilt/Android.mk
-+++ b/prebuilt/Android.mk
-@@ -11,6 +11,7 @@ LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
- LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
- 
- # Manage list
-+RELINK_SOURCE_FILES += $(TARGET_RECOVERY_ROOT_OUT)/sbin/adf_test
- RELINK_SOURCE_FILES += $(TARGET_RECOVERY_ROOT_OUT)/sbin/dump_image
- RELINK_SOURCE_FILES += $(TARGET_RECOVERY_ROOT_OUT)/sbin/flash_image
- RELINK_SOURCE_FILES += $(TARGET_RECOVERY_ROOT_OUT)/sbin/erase_image
 -- 
 2.46.0
 
