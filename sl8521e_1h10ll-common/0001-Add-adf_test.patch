@@ -1,13 +1,13 @@
-From f9d83b25ec76e2bb88c371fa6903928d7ba92508 Mon Sep 17 00:00:00 2001
+From f075046e0f3de5036bd42c78346bb5ecfefb3009 Mon Sep 17 00:00:00 2001
 From: xunmod <116288337+xunmod@users.noreply.github.com>
 Date: Tue, 27 Aug 2024 14:24:24 +0800
 Subject: [PATCH] Add adf_test
 
 ---
  Android.mk          |   2 +
- adf_test/Android.mk |  27 +++
+ adf_test/Android.mk |  28 +++
  adf_test/adf_test.c | 405 ++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 434 insertions(+)
+ 3 files changed, 435 insertions(+)
  create mode 100644 adf_test/Android.mk
  create mode 100644 adf_test/adf_test.c
 
@@ -33,10 +33,10 @@ index aedb3f9..7343ba4 100755
      $(commands_TWRP_local_path)/libtar/Android.mk \
 diff --git a/adf_test/Android.mk b/adf_test/Android.mk
 new file mode 100644
-index 0000000..7dceb1b
+index 0000000..294c4ac
 --- /dev/null
 +++ b/adf_test/Android.mk
-@@ -0,0 +1,27 @@
+@@ -0,0 +1,28 @@
 +#
 +# Copyright (C) 2013 The Android Open Source Project
 +#
@@ -56,6 +56,7 @@ index 0000000..7dceb1b
 +
 +include $(CLEAR_VARS)
 +LOCAL_SRC_FILES := adf_test.c
++LOCAL_CFLAGS := -std=c99
 +LOCAL_MODULE := adf_test
 +LOCAL_MODULE_STEM := twrp
 +LOCAL_MODULE_TAGS := eng
