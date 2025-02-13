@@ -44,6 +44,9 @@ jobs:
           sudo rm -f /usr/bin/python /usr/bin/python3.6 /usr/bin/python3.6m /usr/local/bin/python
           sudo ln -sf /usr/bin/python2.7 /usr/bin/python
           cd $GITHUB_WORKSPACE/twrp
+          pushd bootable/recovery
+          patch -p1 < ../../device/Xiaoxun/sl8521e_1h10ll_sw761/.github/workflows/0001-Fix-Android-5.1-build.patch
+          popd
           source build/envsetup.sh
           lunch omni_sl8521e_1h10ll_sw761-eng
           mka -j$(nproc --all) recoveryimage
